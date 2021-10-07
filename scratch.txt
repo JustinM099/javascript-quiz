@@ -1,0 +1,44 @@
+// GIVEN I am taking a code quiz
+// WHEN I click the start button
+// THEN a timer starts and I am presented with a question
+// WHEN I answer a question
+// THEN I am presented with another question
+// WHEN I answer a question incorrectly
+// THEN time is subtracted from the clock
+// WHEN all questions are answered or the timer reaches 0
+// THEN the game is over
+// WHEN the game is over
+// THEN I can save my initials and my score
+
+initial state - init function
+when start button is pressed - event listener
+timer starts - timer function
+    while there are questions remaining: - if questions.length < 0 - put on answer buttons
+        random question is displayed on screen 
+        answers are displayed as buttons on screen
+        when a button is clicked
+            question is removed from array
+            if button is correct answer
+                score++
+                next question
+                'correct' message displayed
+                
+            if button is incorrect answer
+                next question
+                'incorrect' message displayed
+    if there are no questions remaining:
+        'game over' message is displayed
+        initials input is asked for
+        score is displayed
+        score is compared to stored high score
+        if score > than high score
+            high score = score
+            high score winner = initials
+    if timer runs out:
+        'game over' message is displayed
+        initials input is asked for
+        score is displayed
+        score is compared to stored high score
+        if score > than high score
+            high score = score
+            high score winner = initials
