@@ -4,30 +4,32 @@
     font-family:Arial, Helvetica, sans-serif;
     line-height: 1.5;
     font-size: 20px;
+    color: lightgray;
 }
 
 body {
     text-align: center;
-    background-color: teal;
+    background: linear-gradient(black, white);
+    height: 100vh;
 }
 
 #high-score-button {
     position: absolute;
     top: 1%;
     left: 1%;
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
+    border-width: 0;
     border-radius: 10%;
-    background-color: grey;
+    background: black;
 }
 
 #start-button {
-    border-color: black;
+    /* border-color: black;
     border-width: 1px;
-    border-style: solid;
+    border-style: solid; */
     border-radius: 10%;
-    background-color: grey;
+    background: linear-gradient(black, white);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .timer {
@@ -38,22 +40,25 @@ body {
     border-width: 1px;
     border-style: solid;
     border-radius: 10%;
-    background-color: grey;
+    background: black;
 }
 
 .question-box {
-    background-color: grey;
+    background: linear-gradient(black, white);
     margin-left: auto;
     margin-right: auto;
     height: 200px;
-    width: 450px;
-    border-color: black;
+    width: 650px;
+    /* border-color: black;
     border-width: 1px;
-    border-style: solid;
+    border-style: solid; */
     padding-top: 100px;
-    margin-top: 4%;
+    margin-top: 15%;
     margin-bottom: 0.5%;
-    border-radius: 10%
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 10%;
+    box-shadow: 0 5px 15px rgb(14, 13, 13);
 }
 
 .answer-section {
@@ -66,7 +71,7 @@ body {
 }
 
 .answer-box {
-    background-color: grey;
+    background: linear-gradient(black, white);
     margin-left: auto;
     margin-right: auto;
     height: 100px;
@@ -76,5 +81,21 @@ body {
     border-style: solid;
     margin: 1%;
     border-radius: 10%;
+    transition: transform 0.2s linear;
 }
 
+.answer-box:hover {
+    box-shadow: 0 5px 15px rgb(14, 13, 13);
+    transform: translateY(-7px);
+}
+
+.flavortext {
+    height: 20px;
+}
+
+.submit-button {
+    border-radius: 10%;
+    background: linear-gradient(black, white);
+    margin-left: auto;
+    margin-right: auto;
+}

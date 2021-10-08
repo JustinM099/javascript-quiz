@@ -1,4 +1,4 @@
-//query selectors
+// query selectors
 let questionBox = document.querySelector(".question-box")
 let startButton = document.querySelector("#start-button")
 let timerEl = document.querySelector(".timer")
@@ -9,6 +9,7 @@ let answerA = document.getElementById("a")
 let answerB = document.getElementById("b")
 let answerC = document.getElementById("c")
 let answerD = document.getElementById("d")
+let highScoreButton = document.getElementById("high-score-button")
 
 
 //question/answer pairs put into an array of objects
@@ -51,18 +52,26 @@ let lastQuestion = (questions.length - 1)
 let currentQuestion = 0
 let timeInterval
 let score = 0
-let highScore //this is the high score read from local storage
+let highScore = 0 //this is the high score read from local storage
 let newHighScore //this is the high score written into local storage
 let scoreUser //this is the initials of the current player of the game
-let highScoreUser //this is the initials of the highest scoring player read from local storage
+let highScoreUser = '' //this is the initials of the highest scoring player read from local storage
 let newHighScoreUser //this is the initials of the highest scoring player written into local storage
 let inputForm = document.createElement("form")
 let initialsInput = document.createElement("input")
 let submit = document.createElement("input")
+let timeLeft
+
+getHighScore()
+
+//set up the form elements
+inputForm.style.margin = '5%'
 submit.type = "submit"
 submit.value = "Submit"
+submit.classList.add("submit-button")
 initialsInput.type = "text"
 initialsInput.placeholder = "Enter your initials here!"
+initialsInput.setAttribute('id', 'initials-input')
 
 //initial display state
 questionBox.innerHTML = "<h1>CODING QUIZ CHALLENGE</h1><p>Try to answer the following Javascript coding questions. At the end, you'll be able to enter your initials and see the high score!</p>"
@@ -93,6 +102,12 @@ answerD.addEventListener("click", function(){
     checkAnswer()
 })
 
+//event listener for the initials submit button
+submit.addEventListener("click", recordInitials)
+
+//event listener for high score button
+highScoreButton.addEventListener("click", highScoreScreen)
+
 //places questions on the page
 function placeQuestion() {
     let q = questions[currentQuestion]
@@ -104,8 +119,6 @@ function placeQuestion() {
         answerB.textContent = q.b
         answerC.textContent = q.c
         answerD.textContent = q.d
-
-
     }
 }
 //compares your answer to correct answer, iterates score if correct, places flavor text message
@@ -130,7 +143,6 @@ function checkAnswer(){
             answerBox[i].style.display = 'none'
             flavorText.textContent = ''
             answerSection.style.height = '0px'
-            // answerSection.innerHTML = "<input type='text' name='user-initials' id='user-initials'"
         }  
         clearInterval(timeInterval)
         return
@@ -141,14 +153,15 @@ function checkAnswer(){
         console.log(score)
         flavorText.textContent = 'You got it!'
     }else{
-        flavorText.textContent = 'Wrong, sorry.'
+        timeLeft = timeLeft - 10
+        flavorText.textContent = 'Wrong, sorry. 10 second penalty!'
     }
     currentQuestion++
     placeQuestion()
 }
 
 function timer() { //timer function
-    let timeLeft = 15
+    timeLeft = 100
     timeInterval = setInterval(function () {
         timerEl.textContent = timeLeft + ' seconds left.' //displays time left
         timeLeft-- //decrements timer
@@ -156,8 +169,10 @@ function timer() { //timer function
                 clearInterval(timeInterval); //stops timer
                 timerEl.textContent = ""
                 questionBox.innerHTML = "<h1>Time's Up! You scored " + score + " point(s)!</h1>"
-                for(let i = 0; i< answerBox.length; i++)
+                for(let i = 0; i< answerBox.length; i++){
                     answerBox[i].style.display = 'none'
+                    startButton.style.display = 'block'
+                }
         }
         }
     , 1000);
@@ -170,30 +185,63 @@ function playGame(){ //starts game
     getHighScore()
     timer()
     placeQuestion()
-    setHighScore()
+    
 }
 
 function setHighScore(){ //puts high score into local storage
-    localStorage.setItem('highScore', 'newHighScore')
-    localStorage.setItem('highScoreUser', 'newHighScoreUser')
+    highScore = newHighScore
+    highScoreUser = newHighScoreUser
+    localStorage.setItem("highScore", JSON.stringify(newHighScore))
+    localStorage.setItem("highScoreUser", JSON.stringify(newHighScoreUser))
 }
 
 function getHighScore(){ //gets high score from local storage
-  highScore = localStorage.getItem('highScore')
-  highScoreUser = localStorage.getItem('highScoreUser')
+        highScore = JSON.parse(localStorage.getItem("highScore"))
+        highScoreUser = JSON.parse(localStorage.getItem("highScoreUser"))
 }
 
+function recordInitials(event){
+    event.preventDefault()
+    scoreUser = document.getElementById('initials-input').value
+    if(score > highScore){
+        newHighScore = score //set the new high score
+        newHighScoreUser = scoreUser //set the new high score user
+    }
+    else{
+        newHighScore = highScore
+        newHighScoreUser = highScoreUser
+    }
+    setHighScore()
+    console.log('highScore = ' + highScore)
+    console.log('highScoreUser = ' + highScoreUser)
+    highScoreScreen()
 
+}
 
 function highScoreScreen(){
-    questionBox.innerHTML = "<h1> The all time high score is " + highScore + " by " + highUser + "!"
+    if(!highScore){
+        questionBox.innerHTML = "No high scores yet. Be the first!"
+        clearInterval(timeInterval)
+        timerEl.textContent = ""
+        flavorText.textContent = ""
+        for(let i = 0; i< answerBox.length; i++){
+            answerBox[i].style.display = 'none'
+            startButton.style.display = 'block'
+        }
+    }
+    else{
+        getHighScore()
+        clearInterval(timeInterval)
+        timerEl.textContent = ""
+        flavorText.textContent = ""
+        questionBox.innerHTML = "<h1> The all time high score is " + highScore + " by " + highScoreUser + "!"
+        for(let i = 0; i< answerBox.length; i++){
+            answerBox[i].style.display = 'none'
+            startButton.style.display = 'block'
+        }
+    }
 }
 
 //current todos:
-    //high score
-        //have the user input their initials at the game over/score show screen
-        //if there is a high score in local storage, compare the score to the high score.
-        //if the score is higher than the high score, then replace the high score with the current score
-        //if no high score, the current score becomes the high score
-        //put the new high score into local storage
-        //display the high score when the high score button is pressed
+    //add more questions
+    //improve styling
