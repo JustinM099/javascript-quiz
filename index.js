@@ -10,6 +10,7 @@ let answerB = document.getElementById("b")
 let answerC = document.getElementById("c")
 let answerD = document.getElementById("d")
 let highScoreButton = document.getElementById("high-score-button")
+const h1 = document.querySelector('h1')
 
 
 //question/answer pairs put into an array of objects
@@ -124,11 +125,11 @@ initialsInput.setAttribute('id', 'initials-input')
 
 //initial display state
 questionBox.innerHTML = "<h1>CODING QUIZ CHALLENGE</h1><p>Try to answer the following Javascript coding questions. At the end, you'll be able to enter your initials and see the high score!</p>"
+questionBox.style.animation = "blink .5s step-end"
 for (let i = 0; i < answerBox.length; i++) {
     answerBox[i].style.display = 'none'
 }
 answerSection.style.height = '0px'
-
 
 //event listener for the start button
 startButton.addEventListener("click", playGame)
