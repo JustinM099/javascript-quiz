@@ -16,25 +16,25 @@ let highScoreButton = document.getElementById("high-score-button")
 let questions = [{
     question: 'What is the name of the Javascript object that represents a sequence of characters?',
     a: 'string',
-    b: 'The DOM',
-    c: 'Chrome Developer Tools',
-    d: 'curly brackets',
+    b: '<h1>',
+    c: 'Netscape',
+    d: 'parentheses',
     answer: 'a'
 },
 {
     question: 'What do we use in Javascript to target and manipulate HTML elements?',
-    a: 'string',
+    a: 'booleans',
     b: 'The DOM',
-    c: 'Chrome Developer Tools',
-    d: 'curly brackets',
+    c: 'VS Code',
+    d: 'bootstrap',
     answer: 'b'
 },
 {
     question: 'What browser tool is commonly used to inspect document elements?',
-    a: 'string',
-    b: 'The DOM',
+    a: 'Finder',
+    b: 'search bar',
     c: 'Chrome Developer Tools',
-    d: 'curly brackets',
+    d: 'Google.com',
     answer: 'c'
 },
 {
@@ -158,13 +158,14 @@ submit.addEventListener("click", recordInitials)
 highScoreButton.addEventListener("click", highScoreScreen)
 
 //places questions & answers on the page
-function placeQuestion() {
-    let q = questions[currentQuestion]
-    for (let i = 0; i < questions.length; i++) {
+function placeQuestion() { 
         answerBox[0].style.display = 'block'
         answerBox[1].style.display = 'block'
         answerBox[2].style.display = 'block'
         answerBox[3].style.display = 'block'
+    let q = questions[currentQuestion]
+    for (let i = 0; i < questions.length; i++) {
+       
         answerSection.style.height = '250px'
         questionBox.innerHTML = '<h1>' + q.question + '</h1>'
         answerA.textContent = q.a
