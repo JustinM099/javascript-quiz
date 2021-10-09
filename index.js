@@ -12,7 +12,6 @@ let answerD = document.getElementById("d")
 let highScoreButton = document.getElementById("high-score-button")
 const h1 = document.querySelector('h1')
 
-
 //question/answer pairs put into an array of objects
 let questions = [{
     question: 'What is the name of the Javascript object that represents a sequence of characters?',
@@ -183,7 +182,6 @@ function checkAnswer() {
         timerEl.textContent = "Game Over!"
         if (selectedAnswer === questions[currentQuestion].answer) {
             score++
-            console.log(score)
             flavorText.textContent = 'You got it!'
         }
         else {
@@ -204,7 +202,6 @@ function checkAnswer() {
 
     if (selectedAnswer === questions[currentQuestion].answer) {
         score++
-        console.log(score)
         flavorText.textContent = 'You got it!'
     } else {
         timeLeft = timeLeft - 10
@@ -242,7 +239,6 @@ function playGame() { //starts game
     getHighScore()
     timer()
     placeQuestion()
-
 }
 
 function setHighScore() { //puts high score into local storage
@@ -269,10 +265,7 @@ function recordInitials(event) {
         newHighScoreUser = highScoreUser
     }
     setHighScore()
-    console.log('highScore = ' + highScore)
-    console.log('highScoreUser = ' + highScoreUser)
     highScoreScreen()
-
 }
 
 function highScoreScreen() {

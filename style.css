@@ -28,9 +28,6 @@ body {
 }
 
 #start-button {
-    /* border-color: black;
-    border-width: 1px;
-    border-style: solid; */
     border-radius: 10%;
     background: var(--background);
     margin-left: auto;
@@ -54,17 +51,13 @@ body {
     margin-right: auto;
     height: 200px;
     width: 650px;
-    /* border-color: black;
-    border-width: 1px;
-    border-style: solid; */
     padding-top: 100px;
-    margin-top: 15%;
+    margin-top: 10%;
     margin-bottom: 0.5%;
     padding-left: 2%;
     padding-right: 2%;
     border-radius: 10%;
     box-shadow: 0 5px 15px rgb(14, 13, 13);
-    /* font-size: 40px; */
 }
 
 .answer-section {
