@@ -98,3 +98,27 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+
+
+@media screen and (max-width: 768px) {
+    .question-box {
+        width: 350px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .answer-section {
+        width: 350px;
+
+    }
+
+    .answer-box {
+        width: 150px;
+    }
+
+    .flavortext {
+        padding-top: 10%;
+    }
+}
